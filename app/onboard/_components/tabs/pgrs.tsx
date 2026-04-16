@@ -13,32 +13,32 @@ export function PGRSTab({ register, errors }: Props) {
     <>
       <PanelHeader title="PGRS Configuration" accent="#f59e0b" />
       <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-        <Field id="PGRSUserID" label="PGRS User ID" required error={errors.PGRSUserID?.message}>
+        <Field id="PGRSUserID" label="PGRS User ID" error={errors.PGRSUserID?.message}>
           <Input id="PGRSUserID" placeholder="e.g. user123" className={inp}
             aria-invalid={!!errors.PGRSUserID} {...register("PGRSUserID")} />
         </Field>
 
-        <Field id="PGRSPassword" label="PGRS Password" required error={errors.PGRSPassword?.message}>
+        <Field id="PGRSPassword" label="PGRS Password" error={errors.PGRSPassword?.message}>
           <Input id="PGRSPassword" type="password" placeholder="Enter password"
             className={inp} aria-invalid={!!errors.PGRSPassword} {...register("PGRSPassword")} />
         </Field>
 
-        <Field id="PGRSSrcID" label="PGRS Source ID" required error={errors.PGRSSrcID?.message}>
+        <Field id="PGRSSrcID" label="PGRS Source ID" error={errors.PGRSSrcID?.message}>
           <Input id="PGRSSrcID" placeholder="e.g. 20" className={inp}
             aria-invalid={!!errors.PGRSSrcID} {...register("PGRSSrcID")} />
         </Field>
 
-        <Field id="PGRSOfcID" label="PGRS Office ID" required error={errors.PGRSOfcID?.message}>
+        <Field id="PGRSOfcID" label="PGRS Office ID" error={errors.PGRSOfcID?.message}>
           <Input id="PGRSOfcID" placeholder="e.g. 30" className={inp}
             aria-invalid={!!errors.PGRSOfcID} {...register("PGRSOfcID")} />
         </Field>
 
-        <Field id="PGRSCreatedBy" label="PGRS Created By" required error={errors.PGRSCreatedBy?.message}>
+        <Field id="PGRSCreatedBy" label="PGRS Created By" error={errors.PGRSCreatedBy?.message}>
           <Input id="PGRSCreatedBy" placeholder="e.g. 1" className={inp}
             aria-invalid={!!errors.PGRSCreatedBy} {...register("PGRSCreatedBy")} />
         </Field>
 
-        <Field id="PGRSPush" label="PGRS Push" required error={errors.PGRSPush?.message}>
+        <Field id="PGRSPush" label="PGRS Push" error={errors.PGRSPush?.message}>
           <select id="PGRSPush" aria-invalid={!!errors.PGRSPush}
             className={sel} {...register("PGRSPush")}>
             <option value="true">True</option>

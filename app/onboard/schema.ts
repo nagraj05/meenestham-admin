@@ -26,12 +26,12 @@ export const onboardSchema = z.object({
   State:         z.string().min(1, "State is required"),
   ECACKey:       z.string().min(1, "ECAC Key is required"),
 
-  PGRSUserID:    z.string().min(1, "PGRS User ID is required"),
-  PGRSPassword:  z.string().min(1, "PGRS Password is required"),
-  PGRSSrcID:     z.string().min(1, "Source ID is required"),
-  PGRSOfcID:     z.string().min(1, "Office ID is required"),
-  PGRSCreatedBy: z.string().min(1, "Created By is required"),
-  PGRSPush:      z.enum(["true", "false"], "PGRS Push is required"),
+  PGRSUserID:    z.string().optional(),
+  PGRSPassword:  z.string().optional(),
+  PGRSSrcID:     z.string().optional(),
+  PGRSOfcID:     z.string().optional(),
+  PGRSCreatedBy: z.string().optional(),
+  PGRSPush:      z.enum(["true", "false"]).optional(),
 
   UserKey:  z.string().min(1, "User Key is required"),
   Email:    z.string().min(1, "Email is required").email("Enter a valid email"),

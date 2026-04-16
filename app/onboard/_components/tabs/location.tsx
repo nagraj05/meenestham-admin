@@ -24,7 +24,7 @@ export function LocationTab({ register, errors }: Props) {
         </Field>
 
         <Field id="ECACKey" label="ECAC Key" required error={errors.ECACKey?.message}>
-          <Input id="ECACKey" placeholder="e.g. 50" className={inp}
+          <Input id="ECACKey" placeholder="Add Election Commission AC Code" className={inp}
             aria-invalid={!!errors.ECACKey} {...register("ECACKey")} />
         </Field>
       </div>

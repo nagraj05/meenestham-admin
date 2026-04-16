@@ -13,12 +13,12 @@ export function ClientConfigTab({ register, errors }: Props) {
     <>
       <PanelHeader title="Client Configuration" accent="#6d28d9" />
       <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-        <Field id="SClientKey" label="S Client Key" required error={errors.SClientKey?.message}>
+        <Field id="SClientKey" label="Source Client Key" required error={errors.SClientKey?.message}>
           <Input id="SClientKey" placeholder="e.g. 1" className={inp}
             aria-invalid={!!errors.SClientKey} {...register("SClientKey")} />
         </Field>
 
-        <Field id="TClientKey" label="T Client Key" required error={errors.TClientKey?.message}>
+        <Field id="TClientKey" label="Target Client Key" required error={errors.TClientKey?.message}>
           <Input id="TClientKey" placeholder="e.g. 102" className={inp}
             aria-invalid={!!errors.TClientKey} {...register("TClientKey")} />
         </Field>
@@ -31,11 +31,11 @@ export function ClientConfigTab({ register, errors }: Props) {
         </Field>
 
         <Field id="ACKey" label="AC Key" required error={errors.ACKey?.message}>
-          <Input id="ACKey" placeholder="e.g. 1" className={inp}
+          <Input id="ACKey" placeholder="e.g. Add 4 digit LGD code" className={inp}
             aria-invalid={!!errors.ACKey} {...register("ACKey")} />
         </Field>
 
-        <Field id="ClientSC" label="Client SC" required error={errors.ClientSC?.message}>
+        <Field id="ClientSC" label="Client Short code" required error={errors.ClientSC?.message}>
           <Input id="ClientSC" placeholder="e.g. EXC" maxLength={10} className={inp}
             aria-invalid={!!errors.ClientSC} {...register("ClientSC")} />
         </Field>
