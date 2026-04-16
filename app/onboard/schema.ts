@@ -33,7 +33,6 @@ export const onboardSchema = z.object({
   PGRSCreatedBy: z.string().optional(),
   PGRSPush:      z.enum(["true", "false"]).optional(),
 
-  UserKey:  z.string().min(1, "User Key is required"),
   Email:    z.string().min(1, "Email is required").email("Enter a valid email"),
   Name:     z.string().min(2, "Must be at least 2 characters"),
   Contact:  z.string().regex(/^[0-9]{10}$/, "Must be exactly 10 digits"),
@@ -52,5 +51,5 @@ export const defaultValues: OnboardFormValues = {
   StateKey: "", State: "", ECACKey: "",
   PGRSUserID: "", PGRSPassword: "", PGRSSrcID: "", PGRSOfcID: "",
   PGRSCreatedBy: "", PGRSPush: "true",
-  UserKey: "", Email: "", Name: "", Contact: "", Password: "",
+  Email: "", Name: "", Contact: "", Password: "",
 };
