@@ -29,7 +29,7 @@ export function countTabErrors(id: TabId, errors: FieldErrors<OnboardFormValues>
       ].filter(Boolean).length;
     case "user":
       return [
-        errors.UserKey, errors.Email, errors.Name, errors.Contact, errors.Password,
+        errors.Email, errors.Name, errors.Contact, errors.Password,
       ].filter(Boolean).length;
   }
 }
