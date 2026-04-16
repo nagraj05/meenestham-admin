@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function OnboardHeader({ totalErrors }: { totalErrors: number }) {
   return (
-    <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border/50 bg-white/70 px-8 py-4 backdrop-blur-md dark:bg-zinc-900/70">
+    <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border/50 bg-white/70 px-4 py-3 backdrop-blur-md sm:px-8 sm:py-4 dark:bg-zinc-900/70">
       <div className="flex items-center gap-3">
         <Image
           src="/logos/logo-mobile.png"
@@ -13,7 +13,7 @@ export function OnboardHeader({ totalErrors }: { totalErrors: number }) {
           priority
         />
         <div>
-          <p className="text-[15px] font-bold tracking-tight text-foreground leading-none">
+          <p className="text-[13px] font-bold tracking-tight text-foreground leading-none sm:text-[15px]">
             MEE NESTHAM Admin
           </p>
         </div>

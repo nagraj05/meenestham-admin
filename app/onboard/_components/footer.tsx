@@ -15,7 +15,7 @@ export function OnboardFooter({
   onTabChange: (id: TabId) => void;
 }) {
   return (
-    <div className="mt-2 flex items-center justify-between rounded-2xl border border-border/60 bg-card px-6 py-4 shadow-sm">
+    <div className="mt-2 flex items-center justify-between rounded-2xl border border-border/60 bg-card px-3 py-3 shadow-sm sm:px-6 sm:py-4">
       {/* Prev / Next */}
       <div className="flex gap-2">
         <Button
@@ -66,7 +66,7 @@ export function OnboardFooter({
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-7 text-[13px] font-semibold text-white shadow-md hover:from-violet-700 hover:to-indigo-700 disabled:opacity-60"
+        className="rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 text-[12px] font-semibold text-white shadow-md hover:from-violet-700 hover:to-indigo-700 disabled:opacity-60 sm:px-7 sm:text-[13px]"
       >
         {isSubmitting ? (
           <span className="flex items-center gap-2">

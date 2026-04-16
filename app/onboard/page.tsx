@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -18,6 +18,16 @@ import { UserAccountTab }  from "./_components/tabs/user-account";
 
 export default function OnboardPage() {
   const [activeTab, setActiveTab] = useState<TabId>("client");
+  const tabScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = tabScrollRef.current;
+    if (!container) return;
+    const activeEl = container.querySelector<HTMLElement>(`[data-tab-id="${activeTab}"]`);
+    if (!activeEl) return;
+    const elCenter = activeEl.offsetLeft + activeEl.offsetWidth / 2;
+    container.scrollTo({ left: elCenter - container.offsetWidth / 2, behavior: "smooth" });
+  }, [activeTab]);
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } =
     useForm<OnboardFormValues>({
@@ -60,8 +70,8 @@ export default function OnboardPage() {
           <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as TabId)} className="gap-0">
 
             {/* Tab strip */}
-            <div className="mb-3 overflow-x-auto pb-1">
-              <TabsList className="h-auto w-full gap-1 rounded-2xl bg-white/80 p-1.5 shadow-sm ring-1 ring-border/40 backdrop-blur-sm dark:bg-zinc-900/80">
+            <div ref={tabScrollRef} className="mb-3 overflow-x-auto pb-1">
+              <TabsList className="h-auto w-max min-w-full gap-1 rounded-2xl bg-white/80 p-1.5 shadow-sm ring-1 ring-border/40 backdrop-blur-sm dark:bg-zinc-900/80">
                 {TABS.map((tab) => {
                   const count = tabErrorCounts[tab.id];
                   const isActive = activeTab === tab.id;
@@ -69,6 +79,7 @@ export default function OnboardPage() {
                     <TabsTrigger
                       key={tab.id}
                       value={tab.id}
+                      data-tab-id={tab.id}
                       className="relative flex-1 rounded-xl px-3 py-2.5 text-[12px] font-semibold tracking-wide transition-all duration-200"
                       style={isActive ? { background: tab.accent, color: "#fff", boxShadow: `0 2px 12px ${tab.accent}55` } : {}}
                     >
@@ -87,7 +98,7 @@ export default function OnboardPage() {
             {/* Panel card */}
             <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
               <div className="h-[3px] w-full transition-all duration-300" style={{ background: currentAccent }} />
-              <div className="px-8 py-7">
+              <div className="px-4 py-5 sm:px-8 sm:py-7">
                 <TabsContent value="client">
                   <ClientConfigTab register={register} errors={errors} />
                 </TabsContent>
