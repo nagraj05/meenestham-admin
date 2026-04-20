@@ -1,14 +1,15 @@
 import { type FieldErrors } from "react-hook-form";
 import { type OnboardFormValues } from "./schema";
 
-export type TabId = "client" | "location" | "palette" | "pgrs" | "user";
+export type TabId = "client" | "location" | "palette" | "pgrs" | "user" | "profile";
 
 export const TABS: { id: TabId; label: string; accent: string }[] = [
-  { id: "client",   label: "Client Config", accent: "#6d28d9" },
-  { id: "location", label: "Location",       accent: "#0ea5e9" },
-  { id: "palette",  label: "Color Palette",  accent: "#10b981" },
-  { id: "pgrs",     label: "PGRS",           accent: "#f59e0b" },
-  { id: "user",     label: "User Account",   accent: "#ec4899" },
+  { id: "client",   label: "Client Config",        accent: "#6d28d9" },
+  { id: "location", label: "Location",              accent: "#0ea5e9" },
+  { id: "palette",  label: "Color Palette",         accent: "#10b981" },
+  { id: "pgrs",     label: "PGRS",                  accent: "#f59e0b" },
+  { id: "profile",  label: "Profile Customization", accent: "#f97316" },
+  { id: "user",     label: "User Account",          accent: "#ec4899" },
 ];
 
 export function countTabErrors(id: TabId, errors: FieldErrors<OnboardFormValues>): number {
@@ -30,6 +31,13 @@ export function countTabErrors(id: TabId, errors: FieldErrors<OnboardFormValues>
     case "user":
       return [
         errors.Email, errors.Name, errors.Contact, errors.Password,
+      ].filter(Boolean).length;
+    case "profile":
+      return [
+        errors.MLAName, errors.MLALabel, errors.MLATagContent,
+        errors.CMLabel, errors.CMTagContent,
+        errors.MinisterLabel, errors.MinisterTagContent,
+        errors.StateLabel, errors.StateTagContent,
       ].filter(Boolean).length;
   }
 }

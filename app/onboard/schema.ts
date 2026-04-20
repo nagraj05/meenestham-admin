@@ -37,6 +37,16 @@ export const onboardSchema = z.object({
   Name:     z.string().min(2, "Must be at least 2 characters"),
   Contact:  z.string().regex(/^[0-9]{10}$/, "Must be exactly 10 digits"),
   Password: z.string().min(8, "Must be at least 8 characters"),
+
+  MLAName:            z.string().min(2, "Must be at least 2 characters"),
+  MLALabel:           z.string().min(2, "Must be at least 2 characters"),
+  MLATagContent:      z.string().min(2, "Must be at least 2 characters"),
+  CMLabel:            z.string().min(2, "Must be at least 2 characters"),
+  CMTagContent:       z.string().min(2, "Must be at least 2 characters"),
+  MinisterLabel:      z.string().min(2, "Must be at least 2 characters"),
+  MinisterTagContent: z.string().min(2, "Must be at least 2 characters"),
+  StateLabel:         z.string().min(2, "Must be at least 2 characters"),
+  StateTagContent:    z.string().min(2, "Must be at least 2 characters"),
 });
 
 export type OnboardFormValues = z.infer<typeof onboardSchema>;
@@ -52,4 +62,8 @@ export const defaultValues: OnboardFormValues = {
   PGRSUserID: "", PGRSPassword: "", PGRSSrcID: "", PGRSOfcID: "",
   PGRSCreatedBy: "", PGRSPush: "true",
   Email: "", Name: "", Contact: "", Password: "",
+  MLAName: "", MLALabel: "", MLATagContent: "",
+  CMLabel: "", CMTagContent: "",
+  MinisterLabel: "", MinisterTagContent: "",
+  StateLabel: "", StateTagContent: "",
 };

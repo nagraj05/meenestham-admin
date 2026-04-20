@@ -11,10 +11,11 @@ import { TABS, countTabErrors, type TabId } from "./config";
 import { OnboardHeader } from "./_components/header";
 import { OnboardFooter } from "./_components/footer";
 import { ClientConfigTab } from "./_components/tabs/client-config";
-import { LocationTab }     from "./_components/tabs/location";
-import { PaletteTab }      from "./_components/tabs/palette";
-import { PGRSTab }         from "./_components/tabs/pgrs";
-import { UserAccountTab }  from "./_components/tabs/user-account";
+import { LocationTab } from "./_components/tabs/location";
+import { PaletteTab } from "./_components/tabs/palette";
+import { PGRSTab } from "./_components/tabs/pgrs";
+import { UserAccountTab } from "./_components/tabs/user-account";
+import { ProfileTab } from "./_components/tabs/profile";
 
 export default function OnboardPage() {
   const [activeTab, setActiveTab] = useState<TabId>("client");
@@ -23,21 +24,29 @@ export default function OnboardPage() {
   useEffect(() => {
     const container = tabScrollRef.current;
     if (!container) return;
-    const activeEl = container.querySelector<HTMLElement>(`[data-tab-id="${activeTab}"]`);
+    const activeEl = container.querySelector<HTMLElement>(
+      `[data-tab-id="${activeTab}"]`,
+    );
     if (!activeEl) return;
     const elCenter = activeEl.offsetLeft + activeEl.offsetWidth / 2;
-    container.scrollTo({ left: elCenter - container.offsetWidth / 2, behavior: "smooth" });
+    container.scrollTo({
+      left: elCenter - container.offsetWidth / 2,
+      behavior: "smooth",
+    });
   }, [activeTab]);
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } =
-    useForm<OnboardFormValues>({
-      resolver: zodResolver(onboardSchema),
-      defaultValues,
-      mode: "onChange",
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<OnboardFormValues>({
+    resolver: zodResolver(onboardSchema),
+    defaultValues,
+    mode: "onChange",
+  });
 
   const tabErrorCounts = Object.fromEntries(
-    TABS.map((t) => [t.id, countTabErrors(t.id, errors)])
+    TABS.map((t) => [t.id, countTabErrors(t.id, errors)]),
   ) as Record<TabId, number>;
 
   const totalErrors = Object.values(tabErrorCounts).reduce((a, b) => a + b, 0);
@@ -55,7 +64,9 @@ export default function OnboardPage() {
     const total = TABS.reduce((sum, t) => sum + countTabErrors(t.id, errs), 0);
     toast.error(
       `${total} field${total !== 1 ? "s" : ""} need${total === 1 ? "s" : ""} attention`,
-      { description: "Please review all tabs and fill in the required fields." },
+      {
+        description: "Please review all tabs and fill in the required fields.",
+      },
     );
     const first = TABS.find((t) => countTabErrors(t.id, errs) > 0);
     if (first) setActiveTab(first.id);
@@ -67,8 +78,11 @@ export default function OnboardPage() {
 
       <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
-          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as TabId)} className="gap-0">
-
+          <Tabs
+            value={activeTab}
+            onValueChange={(v) => setActiveTab(v as TabId)}
+            className="gap-0"
+          >
             {/* Tab strip */}
             <div ref={tabScrollRef} className="mb-3 overflow-x-auto pb-1">
               <TabsList className="h-auto w-max min-w-full gap-1 rounded-2xl bg-white/80 p-1.5 shadow-sm ring-1 ring-border/40 backdrop-blur-sm dark:bg-zinc-900/80">
@@ -81,7 +95,15 @@ export default function OnboardPage() {
                       value={tab.id}
                       data-tab-id={tab.id}
                       className="relative flex-1 rounded-xl px-3 py-2.5 text-[12px] font-semibold tracking-wide transition-all duration-200"
-                      style={isActive ? { background: tab.accent, color: "#fff", boxShadow: `0 2px 12px ${tab.accent}55` } : {}}
+                      style={
+                        isActive
+                          ? {
+                              background: tab.accent,
+                              color: "#fff",
+                              boxShadow: `0 2px 12px ${tab.accent}55`,
+                            }
+                          : {}
+                      }
                     >
                       {tab.label}
                       {count > 0 && (
@@ -97,7 +119,10 @@ export default function OnboardPage() {
 
             {/* Panel card */}
             <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
-              <div className="h-[3px] w-full transition-all duration-300" style={{ background: currentAccent }} />
+              <div
+                className="h-[3px] w-full transition-all duration-300"
+                style={{ background: currentAccent }}
+              />
               <div className="px-4 py-5 sm:px-8 sm:py-7">
                 <TabsContent value="client">
                   <ClientConfigTab register={register} errors={errors} />
@@ -110,6 +135,9 @@ export default function OnboardPage() {
                 </TabsContent>
                 <TabsContent value="pgrs">
                   <PGRSTab register={register} errors={errors} />
+                </TabsContent>
+                <TabsContent value="profile">
+                  <ProfileTab register={register} errors={errors} />
                 </TabsContent>
                 <TabsContent value="user">
                   <UserAccountTab register={register} errors={errors} />
@@ -124,7 +152,6 @@ export default function OnboardPage() {
               isSubmitting={isSubmitting}
               onTabChange={setActiveTab}
             />
-
           </Tabs>
         </form>
       </main>
